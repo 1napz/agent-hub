@@ -1,0 +1,1 @@
+export default function Home(){return(<main style={{padding:48,fontFamily:'system-ui'}}><h1>Agent Hub</h1><p>รวม pure-agent-dev + crystalcastle-ai + claude-code</p><ol><li>วางโค้ด private ลง packages/crystalcastle</li><li>ตั้งค่า Supabase</li><li>pnpm dev</li></ol></main>)}
