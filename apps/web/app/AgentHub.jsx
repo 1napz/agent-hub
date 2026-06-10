@@ -42,6 +42,13 @@ const STATS = [
 
 const NAV = ["Agents", "Logs", "Settings"];
 
+/**
+ * Render a small pill-shaped status badge for an agent.
+ *
+ * @param {{status: string}} props - Component props.
+ * @param {('active'|'idle'|'building'|string)} props.status - Status key used to look up the badge label and styling; commonly one of `"active"`, `"idle"`, or `"building"`.
+ * @returns {JSX.Element} A styled inline badge element that displays a colored dot and the human-readable status label.
+ */
 function StatusBadge({ status }) {
   const c = STATUS[status];
   return (
@@ -61,6 +68,14 @@ function StatusBadge({ status }) {
   );
 }
 
+/**
+ * Render an interactive agent card showing the agent's name, status badge, description, repo link, and optional deployment timestamp, with hover styling and a staggered entrance animation.
+ *
+ * @param {Object} props
+ * @param {Object} props.agent - Agent data; should include `name` (string), `description` (string), `repo` (string URL), `status` (string), and optional `lastDeploy` (string).
+ * @param {number} props.delay - Delay in seconds used to stagger the card's entrance animation.
+ * @returns {JSX.Element} A React element representing the agent card.
+ */
 function Card({ agent, delay }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -105,6 +120,11 @@ function Card({ agent, delay }) {
   );
 }
 
+/**
+ * Render the Agent Hub dashboard page containing the top navigation, hero section,
+ * Supabase stats panel, setup checklist, and a responsive grid of agent cards.
+ * @returns {JSX.Element} The rendered Agent Hub dashboard component.
+ */
 export default function AgentHub() {
   const [activeNav, setActiveNav] = useState("Agents");
   const [statsLoaded, setStatsLoaded] = useState(false);
