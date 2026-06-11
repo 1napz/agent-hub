@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+        "ms-dotnettools.csharp",
+        "ms-azuretools.vscode-containers",
+        "docker.docker",
+        "hediet.vscode-drawio",
+        "ms-vscode.vscode-github-issue-notebooks",
+        "eamodio.gitlens",
+        "tyriar.luna-paint",
+        "davidanson.vscode-markdownlint",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "christian-kohler.npm-intellisense",
+        "oxc.oxc-vscode",
+        "esbenp.prettier-vscode",
+        "ms-python.vscode-pylance"
+    ]
+}
