@@ -105,85 +105,48 @@ describe('webpack.config.js', () => {
   it('entry does not reference the output dist directory', () => {
     expect(config.entry).not.toContain('dist')
   })
-})
 
+  // ── Additional: single-compiler config (not an array) ───────────────────
 
+  it('config is not an array (single-compiler config, not multi-compiler)', () => {
+    expect(Array.isArray(config)).toBe(false)
+  })
 
+  // ── Additional: entry uses a relative path ───────────────────────────────
 
+  it('entry starts with "./" indicating a relative path', () => {
+    expect(config.entry).toMatch(/^\.\//)
+  })
 
+  // ── Additional: output.filename is a bare filename, no path separators ───
 
+  it('output.filename contains no path separators', () => {
+    expect(config.output.filename).not.toContain('/')
+    expect(config.output.filename).not.toContain('\\')
+  })
 
+  // ── Additional: output.path is not just __dirname (dist was appended) ────
 
+  it('output.path is not equal to the project root directory alone', () => {
+    expect(config.output.path).not.toBe(__dirname)
+  })
 
+  // ── Additional: mode is one of the three valid webpack mode values ────────
 
+  it('mode is one of the valid webpack mode values', () => {
+    const validModes = ['production', 'development', 'none']
+    expect(validModes).toContain(config.mode)
+  })
 
+  // ── Additional: output.filename has no whitespace ────────────────────────
 
+  it('output.filename contains no whitespace', () => {
+    expect(config.output.filename).not.toMatch(/\s/)
+  })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // ── Additional: entry has no whitespace ──────────────────────────────────
 
   it('entry path contains no whitespace', () => {
     expect(config.entry).not.toMatch(/\s/)
-  })
-
-  // ── Additional: mode is a string type ────────────────────────────────────
-
-  it('mode is a string type', () => {
-    expect(typeof config.mode).toBe('string')
-  })
-
-  // ── Additional: output.path is a child of __dirname ──────────────────────
-
-  it('output.path is nested under the project root directory', () => {
-    expect(config.output.path.startsWith(__dirname)).toBe(true)
-  })
-
-  // ── Additional: output.path length exceeds __dirname length ──────────────
-
-  it('output.path is longer than __dirname (dist was appended, not stripped)', () => {
-    expect(config.output.path.length).toBeGreaterThan(__dirname.length)
-  })
-
-  // ── Additional: entry references the src directory ───────────────────────
-
-  it('entry path includes the "src" directory segment', () => {
-    expect(config.entry).toContain('src')
-  })
-
-  // ── Additional: output object is not null ────────────────────────────────
-
-  it('output is not null', () => {
-    expect(config.output).not.toBeNull()
-  })
-
-  // ── Additional: output.filename is a non-empty string ────────────────────
-
-  it('output.filename is a non-empty string', () => {
-    expect(typeof config.output.filename).toBe('string')
-    expect(config.output.filename.length).toBeGreaterThan(0)
   })
 })
