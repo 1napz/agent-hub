@@ -2,7 +2,7 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main","agent","dev","root" ]
   pull_request:
     branches: [ "main" ]
 
