@@ -1,0 +1,18 @@
+- name: Push image
+if: github.event_name == 'push' && github.ref ==
+'refs/heads/main'
+uses: docker/build-push-action@v6
+with:
+context: ./${{ matrix.service }} file: ./${{
+matrix.service}}/Dockerfile
+push: true
+tags: |
+${{ env.REGISTRY }}/${{
+env.IMAGE_NAMESPACE }}-${{ matrix.service }}:$
+{{ github.sha}}
+${{ env.REGISTRY }}/${{
+env.IMAGE_NAMESPACE }}-${{ matrix.service
+}}:latest cache-from: type=gha, scope=${{
+matrix.service}}
+cache-to: type=gha,mode=max, scope=`${{
+matrix.service}}
