@@ -71,3 +71,4 @@ To ensure smooth merges without breaking main, configure **Branch Protection Rul
  2. **Require status checks to pass:** Ensure GitHub Actions or CI runs pass before the merge button becomes active.
  3. **Require signed commits / linear history:** Optional, but helps enforce commit integrity.
  4. **Automatically delete head branches:** Automatically cleans up deleted feature branches upon PR merge.
+
