@@ -1,0 +1,154 @@
+<div>
+gemini-cli/
+│
+├── packages/
+│   ├── cli/
+│   │   ├── package.json
+│   │   └── src/
+│   │       └── index.ts
+│   │
+│   ├── core/
+│   │   ├── package.json
+│   │   └── src/
+│   │       ├── gemini-client.ts
+│   │       ├── agent.ts
+│   │       └── tools.ts
+│   │
+│   └── mcp/
+│       └── package.json
+│
+├── apps/
+│   └── terminal/
+│
+├── scripts/
+│
+├── .github/
+│   └── workflows/
+│       ├── ci.yml
+│       └── release.yml
+│
+├── package.json
+├── package-lock.json
+└── GEMINI.md
+
+แนวคิด package:
+
+1. CLI package
+
+{
+  "name": "@zyntroai/gemini-cli",
+  "bin": {
+    "gemini": "./dist/index.js"
+  }
+}
+
+ใช้:
+
+npm install -g @zyntroai/gemini-cli
+
+gemini
+
+
+---
+
+2. Core package
+
+{
+  "name": "@zyntroai/gemini-core"
+}
+
+หน้าที่:
+
+Gemini API client
+
+Agent loop
+
+Context manager
+
+Tool execution
+
+MCP integration
+
+
+Gemini CLI ต้นแบบก็แยกแนวคิด CLI กับ core engine เช่นเดียวกัน เพื่อให้ต่อยอดได้ง่าย 
+
+
+---
+
+3. สำหรับ workflow ที่คุณทำอยู่
+
+ผมแนะนำเพิ่ม:
+
+@zyntroai/gemini-cli
+        |
+        |
+        +-- GitHub Actions
+        |
+        +-- Docker
+        |
+        +-- Kubernetes
+        |
+        +-- MCP Server
+        |
+        +-- Telegram GraphQL Bot
+        |
+        +-- Release Agent
+
+ตัวอย่าง command:
+
+gemini review
+
+gemini build
+
+gemini test
+
+gemini deploy
+
+gemini release-note
+
+
+---
+
+4. GEMINI.md
+
+ควรใช้เป็น project memory:
+
+# ZyntroAI Gemini Agent
+
+Role:
+AI DevOps Assistant
+
+Commands:
+- /feat
+- /build
+- /test
+- /deploy
+
+Stack:
+- React
+- Node.js
+- Docker
+- Kubernetes
+- GitHub Actions
+
+Gemini CLI รองรับไฟล์ context แบบ GEMINI.md เพื่อกำหนด behavior ของ agent ใน project ได้ 
+
+
+---
+
+สำหรับ repo ZyntroAI/gemini-cli ของคุณ ผมมองว่าเหมาะทำเป็น:
+
+"ZyntroAI DevOps AI Agent CLI"
+
+มากกว่าแค่ clone Gemini CLI เช่น:
+
+zyntro
+ ├── code agent
+ ├── ci agent
+ ├── deploy agent
+ ├── docs agent
+ ├── security agent
+ └── release agent
+</div>
+<p>ซึ่งเข้ากับ workflow ที่คุณเคยทำ /feat, ci.yml, Kubernetes, Terraform, Telegram GraphQL มากครับ.</p>
+
