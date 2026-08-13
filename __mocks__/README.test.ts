@@ -4,8 +4,7 @@ import { resolve } from 'path'
 
 /**
  * Tests for __mocks__/README.md
- *
- * This README documents the purpose and usage of the Next.js mock shim in Thai.
+ * * This README documents the purpose and usage of the Next.js mock shim in Thai.
  * It explains: mocking API routes, SSR testing, response control, and CI/CD integration.
  * These tests validate that the documentation file is present, well-formed, and contains
  * the expected sections and illustrative code snippet.
@@ -13,7 +12,6 @@ import { resolve } from 'path'
 
 const FILEPATH = resolve(__dirname, 'README.md')
 let content: string
-
 beforeAll(() => {
   content = readFileSync(FILEPATH, 'utf-8')
 })
