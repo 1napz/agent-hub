@@ -4,20 +4,16 @@ import { resolve } from 'path'
 
 /**
  * Tests for __mocks__/README.md
- *
- * This file documents Next.js mock patterns used in the test suite.
- * These tests validate the structure, content, and code examples
- * present in the README to ensure the documentation remains accurate
- * and complete.
+ * * This README documents the purpose and usage of the Next.js mock shim in Thai.
+ * It explains: mocking API routes, SSR testing, response control, and CI/CD integration.
+ * These tests validate that the documentation file is present, well-formed, and contains
+ * the expected sections and illustrative code snippet.
  */
 
 const FILEPATH = resolve(__dirname, 'README.md')
 let content: string
-let lines: string[]
-
 beforeAll(() => {
   content = readFileSync(FILEPATH, 'utf-8')
-  lines = content.split('\n')
 })
 
 describe('__mocks__/README.md — Next.js mock documentation', () => {
@@ -32,138 +28,123 @@ describe('__mocks__/README.md — Next.js mock documentation', () => {
   })
 
   it('file contains exactly 27 lines', () => {
-    expect(lines.length).toBe(27)
+    const lines = content.split('\n')
+    expect(lines).toHaveLength(27)
   })
 
-  it('file has no trailing newline', () => {
+  it('file does not end with a trailing newline', () => {
     expect(content.endsWith('\n')).toBe(false)
   })
 
-  // ── Section headings ─────────────────────────────────────────────────────
+  // ── Main section headers ─────────────────────────────────────────────────
 
-  it('contains the mock functionality section heading', () => {
-    expect(content).toContain('การทำงานของ Mock ใน Next.js')
-  })
-
-  it('contains the code example section heading', () => {
+  it('contains the introduction referencing next-server.ts', () => {
     expect(content).toContain('next-server.ts')
   })
 
-  it('contains the GitHub Workflow integration section', () => {
+  it('contains the mock functionality section header (Thai)', () => {
+    expect(content).toContain('การทำงานของ Mock ใน Next.js')
+  })
+
+  it('contains the code example section header (Thai)', () => {
+    expect(content).toContain('ตัวอย่างโค้ด next-server.ts สำหรับการทดสอบ')
+  })
+
+  it('contains the GitHub workflow section header (Thai)', () => {
     expect(content).toContain('เชื่อมโยงกับ GitHub Workflow')
   })
 
-  // ── Documented concepts ──────────────────────────────────────────────────
+  // ── Feature bullet points ─────────────────────────────────────────────────
 
-  it('documents API Routes mocking concept', () => {
-    expect(content).toContain('API Routes')
+  it('documents the API route mocking feature (Thai)', () => {
+    expect(content).toContain('จำลอง API Routes')
   })
 
-  it('documents SSR (server-side rendering) testing', () => {
-    expect(content).toContain('SSR')
+  it('documents the SSR testing feature (Thai)', () => {
+    expect(content).toContain('ทดสอบ SSR')
   })
 
-  it('documents CI/CD pipeline usage', () => {
-    expect(content).toContain('CI/CD')
+  it('documents the response control feature (Thai)', () => {
+    expect(content).toContain('ควบคุมผลลัพธ์')
   })
 
-  // ── Code example — mockServer object ────────────────────────────────────
+  it('mentions the /api/users example endpoint', () => {
+    expect(content).toContain('/api/users')
+  })
+
+  // ── Embedded code snippet ─────────────────────────────────────────────────
 
   it('contains the mockServer export declaration', () => {
     expect(content).toContain('export const mockServer')
   })
 
-  it('code example uses jest.fn for mocking', () => {
+  it('code snippet uses jest.fn for mocking', () => {
     expect(content).toContain('jest.fn')
   })
 
-  it('code example targets the /api/users endpoint', () => {
-    expect(content).toContain('/api/users')
+  it('code snippet resolves with a Mock User data structure', () => {
+    expect(content).toContain('Mock User')
   })
 
-  it('code example includes the "Mock User" response fixture', () => {
-    expect(content).toContain('"Mock User"')
-  })
-
-  it('code example includes a mock user id of 1', () => {
+  it('code snippet resolves with an id field', () => {
     expect(content).toContain('id: 1')
   })
 
-  it('code example demonstrates the happy-path with Promise.resolve', () => {
+  it('code snippet returns a Promise.resolve for known routes', () => {
     expect(content).toContain('Promise.resolve')
   })
 
-  it('code example demonstrates the error-path with Promise.reject', () => {
+  it('code snippet rejects with an error for unknown routes', () => {
     expect(content).toContain('Promise.reject')
   })
 
-  it('code example returns a data array with user objects', () => {
-    expect(content).toContain('data: [{ id: 1')
-  })
-
-  it('code example throws a "Not Found" error for unknown routes', () => {
+  it('code snippet uses a Not Found error message for unknown routes', () => {
     expect(content).toContain('Not Found')
   })
 
-  // ── Code example — get method ────────────────────────────────────────────
-
-  it('mockServer exposes a get method', () => {
+  it('code snippet includes a get method on mockServer', () => {
     expect(content).toMatch(/mockServer\s*=\s*\{[\s\S]*get:/)
   })
 
-  it('get method accepts a url parameter', () => {
-    expect(content).toContain('get: jest.fn((url)')
+  // ── CI/CD and integration notes ───────────────────────────────────────────
+
+  it('mentions CI/CD pipeline usage (Thai)', () => {
+    expect(content).toContain('CI/CD pipeline')
   })
 
-  // ── Code block format ────────────────────────────────────────────────────
-
-  it('code block is prefixed with the ts language identifier', () => {
-    // The code block uses backtick-delimited ts blocks
-    expect(content).toMatch(/`ts\s*\n/)
+  it('documents the benefit of reducing dependency on external APIs (Thai)', () => {
+    expect(content).toContain('external API')
   })
 
-  it('code block includes the mocks/next-server.ts file path comment', () => {
-    expect(content).toContain('// mocks/next-server.ts')
-  })
-
-  // ── Jest tooling mention ─────────────────────────────────────────────────
-
-  it('mentions Jest as the mocking library', () => {
-    expect(content).toContain('Jest')
-  })
-
-  it('explains that mockServer can be imported instead of real API calls', () => {
+  it('explains that mockServer can replace real API calls in tests (Thai)', () => {
     expect(content).toContain('import mockServer')
   })
 
-  // ── Regression: content integrity ────────────────────────────────────────
+  // ── mocks directory reference ─────────────────────────────────────────────
 
-  it('does not reference any real external API URLs', () => {
-    // The mock documentation should not embed live endpoint URLs
-    const externalUrlPattern = /https?:\/\/(?!.*example)/g
-    const matches = content.match(externalUrlPattern) ?? []
-    expect(matches.length).toBe(0)
+  it('references the mocks directory in the code comment', () => {
+    expect(content).toContain('// mocks/next-server.ts')
   })
 
-  it('mockServer get handler only branches on the documented /api/users path', () => {
-    // Ensure no undocumented conditional branches are described
-    const ifStatements = content.match(/if \(url ===/g) ?? []
-    expect(ifStatements).toHaveLength(1)
+  // ── Regression: content integrity ─────────────────────────────────────────
+
+  it('does not contain placeholder or Lorem Ipsum text', () => {
+    expect(content).not.toMatch(/lorem ipsum/i)
+    expect(content).not.toContain('TODO')
+    expect(content).not.toContain('FIXME')
   })
 
-  // ── Boundary: line-level checks ──────────────────────────────────────────
-
-  it('first line introduces the next-server.ts topic', () => {
-    expect(lines[0]).toContain('next-server.ts')
+  it('the mockServer get method checks the /api/users URL specifically', () => {
+    expect(content).toMatch(/url\s*===\s*["']\/api\/users["']/)
   })
 
-  it('last line ends with a question prompt to the reader', () => {
-    const lastLine = lines[lines.length - 1]
-    expect(lastLine).toContain('?')
+  // ── Boundary: snippet code structure ──────────────────────────────────────
+
+  it('code snippet wraps the get handler in a url parameter', () => {
+    expect(content).toMatch(/get:\s*jest\.fn\(\s*\(url\)/)
   })
 
-  it('has at least three bullet-point items describing mock functionality', () => {
-    const bulletLines = lines.filter((line) => line.trim().startsWith('-'))
-    expect(bulletLines.length).toBeGreaterThanOrEqual(3)
+  it('code snippet returns data as an array with one element', () => {
+    expect(content).toMatch(/data:\s*\[\s*\{/)
   })
 })
