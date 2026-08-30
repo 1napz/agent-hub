@@ -39,6 +39,9 @@ cp .env.example .env
 # ใส่ OPENROUTER_API_KEY=sk-or-v1-xxx ลงใน .env
 docker build -t agent-hub .
 docker run -p 3000:3000 --env-file .env agent-hub
+1. docker compose up -d
+2. เปิด http://localhost:3000
+3. เปิด http://localhost:3000/api/stats  ดู token
 
 
 จากภาพ Repository ของคุณ ตอนนี้โปรเจกต์ agent-hub เริ่มมีโครงสร้างที่ดีแล้ว (.github, skills, app, plugins, types, README และ GitHub Actions) แต่ยังมีสิ่งที่ควรพัฒนาต่อเพื่อให้เป็น production-ready
