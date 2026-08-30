@@ -1,0 +1,10 @@
+{
+  "model": "claude-sonnet-4.5",
+  "permissions": {
+    "allow": ["Bash(npm run:*)", "Bash(docker:*)", "Read(src/**)"],
+    "deny": ["Write(.env)"]
+  },
+  "env": {
+    "OPENROUTER_API_KEY": ""
+  }
+}
