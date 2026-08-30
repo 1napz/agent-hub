@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>agent-hub Test</title></head>
+<body style="font-family:sans-serif; max-width:600px; margin:50px auto">
+  <h2>🧪 Test Agent Hub</h2>
+  <textarea id="input" rows="4" style="width:100%">เขียนแคปชั่นขายของ</textarea>
+  <button onclick="send()">ส่ง</button>
+  <pre id="output"></pre>
+
+  <script>
+  async function send() {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({message: document.getElementById("input").value})
+    });
+    const data = await res.json();
+    document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+  }
+  </script>
+</body>
+</html>
