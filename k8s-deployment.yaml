@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-hub
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: agent-hub
+  template:
+    metadata:
+      labels:
+        app: agent-hub
+    spec:
+      containers:
+      - name: app
+        image: ghcr.io/zyntro/agent-hub:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: REDIS_URL
+          value: "redis://redis:6379"
+        - name: OPENROUTER_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: OPENROUTER_API_KEY
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379

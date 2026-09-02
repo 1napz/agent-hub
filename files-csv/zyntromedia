@@ -1,0 +1,12 @@
+id,topic,default,change_or_question
+1,"AWS region","us-east-1","Change? (region name)"
+2,"Terraform state backend","S3 bucket + DynamoDB lock; S3: zyntromedia-new-crystalcastle-tfstate; DynamoDB: zyntromedia-new-crystalcastle-tf-locks","Change bucket/table names or prefer Terraform Cloud?"
+3,"EKS cluster & node group","Cluster: new-crystalcastle-cluster; Node group instance type: t3.medium; Autoscaling: min 2 / max 6 / desired 3","Change cluster name, instance type, or scaling values?"
+4,"VPC","New VPC with 3 public + 3 private subnets (multi-AZ); CIDR: 10.0.0.0/16","Change CIDR or want to use existing VPC? (reply with existing VPC id)"
+5,"RDS (managed Postgres)","Postgres 15; instance class: db.t3.medium; storage: 20 GB; Multi-AZ: enabled; DB username: appuser (password in Secrets Manager)","Change instance class, storage, or single-AZ?"
+6,"ECR repositories","Create two repos: new-crystalcastle-backend, new-crystalcastle-frontend","Change repo names?"
+7,"Secrets & secrets management","Store DB password and other secrets in AWS Secrets Manager (managed by Terraform)","OK? or prefer SSM Parameter Store / HashiCorp Vault?"
+8,"GitHub Actions Terraform automation","Use OIDC; workflows: fmt/validate/plan on PR, plan artifact, apply on push to main","Choose A) create IAM role + trust policy for GitHub OIDC in Terraform (recommended) or B) you provide role ARN"
+9,"Helm release of app","Use Helm provider to deploy charts/app; Release name: new-crystalcastle; Namespace: app","Create separate values for staging/prod? (default: create dev/staging/prod values files)"
+10,"Repository & commit","Not specified; default branch to create: infra/terraform-aws","Provide target repo (owner/repo) and confirm branch name to create, or say 'just show me files'"
+11,"Anything else to include","e.g., CloudWatch logging, ALB ingress, autoscaling policies, encryption at rest for RDS/S3, tags/owner contact, spot nodes","Specify any additional items to include"

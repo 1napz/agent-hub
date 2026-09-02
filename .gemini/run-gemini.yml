@@ -1,0 +1,43 @@
+yaml
+name: Trigger Gemini CLI
+on:
+  workflow_dispatch:
+    inputs:
+      prompt_text:
+        description: 'What do you want to ask Gemini?'
+        required: true
+        type: string
+        default: 'Summarize the latest project updates.'
+      attachment_path:
+        description: 'Path to file in the repo (optional)'
+        required: false
+        type: string
+
+jobs:
+  run-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (If CLI is Node-based)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install CLI
+        run: npm install -g geminicli # Replace with your actual install command
+
+      - name: Execute Gemini CLI (Text Only)
+        if: $`{{ !inputs.attachment_path }}
+        env:
+          GEMINI_API_KEY: `${{ secrets.GEMINI_API_KEY }}
+        run: |
+          geminicli prompt "$`{{ inputs.prompt_text }}"
+
+      - name: Execute Gemini CLI (With File)
+        if: `${{ inputs.attachment_path }}
+        env:
+          GEMINI_API_KEY: $`{{ secrets.GEMINI_API_KEY }}
+        run: |
+          geminicli prompt "`${{ inputs.prompt_text }}" --file "${{ inputs.attachment_path }}"
