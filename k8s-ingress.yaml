@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: agent-hub-ingress
+  namespace: agent-hub
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+        - api.agenthub.com # เปลี่ยนเป็น domain คุณ
+    secretName: agent-hub-tls
+  rules:
+    - host: api.agenthub.com
+    http:
+      paths:
+            - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: agent-hub
+            port:
+              number: 80

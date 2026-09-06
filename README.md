@@ -33,4 +33,184 @@ Use `agent-hub` when every package in your repo is bundled with webpack and you 
 
 ### Installation
 ```bash
-npm install agent-hub --save-dev
+git clone https://github.com/zyntromedia/agent-hub
+cd agent-hub
+cp .env.example .env
+# ใส่ OPENROUTER_API_KEY=sk-or-v1-xxx ลงใน .env
+docker build -t agent-hub .
+docker run -p 3000:3000 --env-file .env agent-hub
+1. docker compose up -d
+2. เปิด http://localhost:3000
+3. เปิด http://localhost:3000/api/stats  ดู token
+
+
+จากภาพ Repository ของคุณ ตอนนี้โปรเจกต์ agent-hub เริ่มมีโครงสร้างที่ดีแล้ว (.github, skills, app, plugins, types, README และ GitHub Actions) แต่ยังมีสิ่งที่ควรพัฒนาต่อเพื่อให้เป็น production-ready
+
+ลำดับที่แนะนำคือ
+
+🚀 Phase 1: Clean Repository
+
+ลบ node_modules/ ออกจาก Git และเพิ่ม .gitignore
+
+ย้ายไฟล์ Dashboard/PDF/รูปภาพ ไปไว้ใน docs/ หรือ assets/
+
+แยก examples/ สำหรับไฟล์ตัวอย่าง
+
+
+โครงสร้างที่แนะนำ
+
+agent-hub/
+├── .github/
+├── .gemini/
+├── app/
+├── core/
+├── skills/
+├── plugins/
+├── docs/
+├── assets/
+├── scripts/
+├── tests/
+├── packages/
+└── README.md
+
+
+---
+
+⚙️ Phase 2: CI/CD
+
+เพิ่ม Workflow
+
+✅ ci.yml
+
+✅ codeql.yml
+
+✅ dependency-review.yml
+
+✅ secret-scan.yml
+
+✅ release.yml
+
+✅ docs.yml
+
+
+
+---
+
+🧪 Phase 3: Testing
+
+เพิ่ม
+
+Vitest/Jest
+
+Playwright
+
+Coverage Report
+
+Codecov
+
+
+
+---
+
+📦 Phase 4: Package
+
+npm package
+
+Dockerfile
+
+docker-compose.yml
+
+Dev Container
+
+GitHub Codespaces
+
+
+
+---
+
+☸️ Phase 5: Cloud
+
+Kubernetes manifests
+
+Helm Chart
+
+Terraform
+
+Vercel deployment
+
+Supabase integration
+
+
+
+---
+
+🤖 Phase 6: AI Features
+
+จากที่เห็นมีโฟลเดอร์ skills/ แล้ว แนะนำเพิ่ม
+
+MCP Server
+
+Brave Skills
+
+Gemini CLI integration
+
+Claude Code support
+
+OpenAI Agents SDK
+
+Plugin Marketplace
+
+
+
+---
+
+📊 Phase 7: Monitoring
+
+Prometheus
+
+Grafana
+
+OpenTelemetry
+
+Sentry
+
+Telegram notifications
+
+
+
+---
+
+สิ่งที่ควรทำ "วันนี้"
+
+1. ลบ node_modules ออกจาก Git
+
+
+2. เพิ่ม .gitignore
+
+
+3. เพิ่ม ci.yml
+
+
+4. เพิ่ม CodeQL
+
+
+5. เพิ่ม Secret Scan
+
+
+6. จัดโครงสร้าง docs/
+
+
+7. เขียน CONTRIBUTING.md
+
+
+8. เพิ่ม LICENSE
+
+
+9. ตั้ง GitHub Releases
+
+
+10. ตั้ง Semantic Versioning
+
+
+
+หลังจากนั้น Repository จะพร้อมสำหรับการพัฒนาแบบทีมและการเปิดเป็น Open Source มากขึ้น.
